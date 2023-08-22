@@ -1,0 +1,44 @@
+---
+# Python 3 with PostgreSQL
+version: "3"
+
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile    
+    hostname: ibm
+    container_name: arvato
+    volumes:
+      - ..:/app
+      # - ~/.bluemix/apikey.json:/home/vscode/.bluemix/apikey.json
+    command: sleep infinity
+    environment:
+      FLASK_APP: service:app
+      FLASK_DEBUG: "True"
+      PORT: 7080
+      DATABASE_URI: postgresql://postgres:postgres@postgres:5433/postgres
+    networks:
+      - dev
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:alpine
+    # Uncomment ports to access database from your computer (optional)
+    ports:
+      - 5433:5433
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    networks:
+      - dev
+
+volumes:
+  postgres:
+
+networks:
+  dev:

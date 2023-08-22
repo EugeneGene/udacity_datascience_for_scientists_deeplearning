@@ -1,0 +1,26 @@
+language: python
+python:
+  - "3.9"
+
+# Request a Docker service
+services:
+  - docker
+
+# Define the test environment
+env:
+  - FLASK_APP=service:app FLASK_DEBUG="True" DATABASE_URI=postgresql://postgres:postgres@localhost:5432/postgres
+
+# Run Postgres in a container
+before_install:
+  - docker run -d --name postgres -p 5432:5432 -e POSTGRES_PASSWORD=postgres postgres:alpine
+  - docker ps -a
+
+# Install Python dependencies
+install:
+  - pip install -r requirements.txt
+
+# before_script:
+
+# Run the tests
+script:
+  - nosetests
