@@ -8,7 +8,7 @@ services:
       context: ..
       dockerfile: .devcontainer/Dockerfile    
     hostname: ibm
-    container_name: arvato
+    container_name: deep_learn
     volumes:
       - ..:/app
       # - ~/.bluemix/apikey.json:/home/vscode/.bluemix/apikey.json
@@ -16,8 +16,8 @@ services:
     environment:
       FLASK_APP: service:app
       FLASK_DEBUG: "True"
-      PORT: 7080
-      DATABASE_URI: postgresql://postgres:postgres@postgres:5433/postgres
+      PORT: 6081
+      DATABASE_URI: postgresql://postgres:postgres@postgres:4432/postgres
     networks:
       - dev
     depends_on:
@@ -27,13 +27,13 @@ services:
     image: postgres:alpine
     # Uncomment ports to access database from your computer (optional)
     ports:
-      - 5433:5433
+      - 4432:4432
     environment:
       POSTGRES_USER: postgres
       POSTGRES_DB: postgres
       POSTGRES_PASSWORD: postgres
     volumes:
-      - postgres:/var/lib/postgresql/data
+      - postgres:/var/lib/postgresql/data_dl
     networks:
       - dev
 

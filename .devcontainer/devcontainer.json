@@ -1,5 +1,5 @@
 {
-	"name": "Arvato",
+	"name": "Deep Learning",
 	"dockerComposeFile": "docker-compose.yml",
 	"service": "app",
 	"workspaceFolder": "/app",
