@@ -16,7 +16,7 @@ services:
     environment:
       FLASK_APP: service:app
       FLASK_DEBUG: "True"
-      PORT: 7080
+      PORT: 7081
       DATABASE_URI: postgresql://postgres:postgres@postgres:5433/postgres
     networks:
       - dev
@@ -27,7 +27,7 @@ services:
     image: postgres:alpine
     # Uncomment ports to access database from your computer (optional)
     ports:
-      - 5433:5433
+      - 5432:5432
     environment:
       POSTGRES_USER: postgres
       POSTGRES_DB: postgres
